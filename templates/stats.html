@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard — Momentum</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">📊</div>
+                <h1>Momentum Analytics</h1>
+                <p class="subtitle">Track Your Productivity by Adesh</p>
+                <div class="header-badge">Powered by Go 🚀</div>
+            </div>
+        </header>
+
+        <div class="back-link">
+            <a href="/" class="btn btn-secondary">← Back to Tasks</a>
+        </div>
+
+        <div class="stats-dashboard">
+            <!-- Overview Section -->
+            <div class="stats-section">
+                <h2>📄 Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-value">{{.Stats.Total}}</div>
+                        <div class="stat-card-label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-card-value">{{.Stats.Completed}}</div>
+                        <div class="stat-card-label">✅ Completed</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-card-value">{{.Stats.Pending}}</div>
+                        <div class="stat-card-label">📅 Pending</div>
+                    </div>
+                    <div class="stat-card info">
+                        <div class="stat-card-value">{{printf "%.1f" .Stats.CompletionRate}}%</div>
+                        <div class="stat-card-label">📈 Completion Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority Breakdown -->
+            <div class="stats-section">
+                <h2>🎯 Priority Breakdown</h2>
+                <div class="stats-grid">
+                    <div class="stat-card priority-high">
+                        <div class="stat-card-value">{{.Stats.High}}</div>
+                        <div class="stat-card-label">🔴 High Priority</div>
+                    </div>
+                    <div class="stat-card priority-medium">
+                        <div class="stat-card-value">{{.Stats.Medium}}</div>
+                        <div class="stat-card-label">🟡 Medium Priority</div>
+                    </div>
+                    <div class="stat-card priority-low">
+                        <div class="stat-card-value">{{.Stats.Low}}</div>
+                        <div class="stat-card-label">🟢 Low Priority</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Due Dates Section -->
+            {{if or (gt .Stats.Overdue 0) (gt .Stats.DueToday 0)}}
+            <div class="stats-section">
+                <h2>⏰ Due Dates</h2>
+                <div class="stats-grid">
+                    {{if gt .Stats.Overdue 0}}
+                    <div class="stat-card danger">
+                        <div class="stat-card-value">{{.Stats.Overdue}}</div>
+                        <div class="stat-card-label">⚠️ Overdue Tasks</div>
+                    </div>
+                    {{end}}
+                    {{if gt .Stats.DueToday 0}}
+                    <div class="stat-card warning">
+                        <div class="stat-card-value">{{.Stats.DueToday}}</div>
+                        <div class="stat-card-label">🔔 Due Today</div>
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+            {{end}}
+
+            <!-- Organization Section -->
+            <div class="stats-section">
+                <h2>🏷️ Organization</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-value">{{.Stats.Tagged}}</div>
+                        <div class="stat-card-label">Tagged Tasks</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motivational Message -->
+            <div class="motivation-box">
+                {{if eq .Stats.Total 0}}
+                    <h3>🚀 Let's Get Started!</h3>
+                    <p>Add your first todo and start being productive!</p>
+                {{else if ge .Stats.CompletionRate 75}}
+                    <h3>🎉 Outstanding Work!</h3>
+                    <p>You're absolutely crushing it! Keep up the amazing productivity!</p>
+                {{else if ge .Stats.CompletionRate 50}}
+                    <h3>💪 Great Progress!</h3>
+                    <p>You're doing well! Keep completing those tasks!</p>
+                {{else if gt .Stats.CompletionRate 0}}
+                    <h3>⏫ Time to Focus!</h3>
+                    <p>You've started! Now let's complete more tasks!</p>
+                {{else}}
+                    <h3>🎯 Ready to Begin!</h3>
+                    <p>Start checking off those todos and build momentum!</p>
+                {{end}}
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-section">
+                <h3>Overall Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{.Stats.CompletionRate}}%"></div>
+                </div>
+                <p class="progress-text">{{.Stats.Completed}} of {{.Stats.Total}} todos completed</p>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="/" class="btn btn-primary">← Back to Todos</a>
+        </div>
+
+        <footer>
+            <p>Built with ❤️ using Go 1.25</p>
+        </footer>
+    </div>
+</body>
+</html>

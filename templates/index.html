@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum — Your Go-Powered Productivity Engine</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">✨</div>
+                <h1>Momentum by Adesh</h1>
+                <p class="subtitle">Your Smart Productivity Manager</p>
+                <div class="header-badge">Powered by Go 🚀</div>
+            </div>
+        </header>
+
+        {{if .Message}}
+        <div class="message {{.MessageType}}">
+            {{.Message}}
+        </div>
+        {{end}}
+
+        <!-- Quick Stats -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-label">Total:</span>
+                <span class="stat-value">{{.Stats.Total}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">✅ Completed:</span>
+                <span class="stat-value">{{.Stats.Completed}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">📅 Pending:</span>
+                <span class="stat-value">{{.Stats.Pending}}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Completion:</span>
+                <span class="stat-value">{{printf "%.1f" .Stats.CompletionRate}}%</span>
+            </div>
+        </div>
+
+        <!-- Add Todo Form -->
+        <div class="add-todo-section">
+            <h2>➕ Add New Task</h2>
+            <form action="/add" method="POST" class="add-form">
+                <div class="form-row">
+                    <input type="text" name="title" placeholder="Enter task title..." required class="input-title">
+                    <select name="priority" class="input-priority">
+                        <option value="1">🟡 Medium</option>
+                        <option value="0">🟢 Low</option>
+                        <option value="2">🔴 High</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <input type="date" name="dueDate" class="input-date" title="Due Date">
+                    <input type="text" name="tags" placeholder="Tags (comma-separated)" class="input-tags">
+                    <button type="submit" class="btn btn-primary">Add Task</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Actions Bar -->
+        <div class="actions-bar">
+            <div class="actions-left">
+                <h2>📋 Your Tasks ({{.TotalTodos}})</h2>
+            </div>
+            <div class="actions-right">
+                <form action="/sort" method="POST" style="display: inline;">
+                    <input type="hidden" name="type" value="priority">
+                    <button type="submit" class="btn btn-secondary">Sort by Priority</button>
+                </form>
+                <form action="/sort" method="POST" style="display: inline;">
+                    <input type="hidden" name="type" value="status">
+                    <button type="submit" class="btn btn-secondary">Sort by Status</button>
+                </form>
+                <a href="/stats" class="btn btn-info">📊 Full Statistics</a>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <form action="/search" method="GET">
+                <input type="text" name="q" placeholder="🔍 Search tasks..." class="search-input">
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href="/" class="btn btn-secondary">Clear</a>
+            </form>
+        </div>
+
+        <!-- Todo List -->
+        <div class="todo-list">
+            {{if .Todos}}
+                {{range .Todos}}
+                <div class="todo-item {{if .Completed}}completed{{end}} {{if .IsOverdue}}overdue{{end}} {{if .IsDueToday}}due-today{{end}}">
+                    <div class="todo-main">
+                        <form action="/toggle" method="POST" class="toggle-form">
+                            <input type="hidden" name="id" value="{{.ID}}">
+                            <button type="submit" class="checkbox {{if .Completed}}checked{{end}}">
+                                {{if .Completed}}✓{{end}}
+                            </button>
+                        </form>
+                        <div class="todo-content">
+                            <div class="todo-title">{{.Title}}</div>
+                            <div class="todo-meta">
+                                <span class="priority-badge {{.Priority.CSSClass}}">{{.Priority}}</span>
+                                {{if .DueDate}}
+                                    <span class="due-date">
+                                        {{if .IsOverdue}}
+                                            ⚠️ OVERDUE: {{.DueDateDisplay}}
+                                        {{else if .IsDueToday}}
+                                            ⏰ DUE TODAY: {{.DueDateDisplay}}
+                                        {{else}}
+                                            📅 Due: {{.DueDateDisplay}}
+                                        {{end}}
+                                    </span>
+                                {{end}}
+                                {{if .Tags}}
+                                    <span class="tags">🏷️ {{.TagsString}}</span>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/delete" method="POST" class="delete-form">
+                        <input type="hidden" name="id" value="{{.ID}}">
+                        <button type="submit" class="btn-delete" onclick="return confirm('Delete this task?')">🗑️</button>
+                    </form>
+                </div>
+                {{end}}
+            {{else}}
+                <div class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <h3>No tasks yet!</h3>
+                    <p>Add your first task above to get started.</p>
+                </div>
+            {{end}}
+        </div>
+
+        <footer>
+            <p>Built with ❤️ using Go 1.25 | <a href="https://golang.org" target="_blank">Learn Go</a></p>
+            <p class="mode-info">💡 Run with <code>go run main_web.go web</code> for web mode | <code>go run main_web.go cli</code> for terminal mode</p>
+        </footer>
+    </div>
+</body>
+</html>

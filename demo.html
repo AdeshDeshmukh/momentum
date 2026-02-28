@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum — Go-Powered Productivity App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Monaco', 'Courier New', monospace;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2d2d2d;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .header h1 {
+            color: #61dafb;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .terminal {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .prompt {
+            color: #4ec9b0;
+        }
+        
+        .command {
+            color: #dcdcaa;
+        }
+        
+        .success {
+            color: #4ec9b0;
+        }
+        
+        .error {
+            color: #f48771;
+        }
+        
+        .info {
+            color: #569cd6;
+        }
+        
+        .high-priority {
+            color: #f48771;
+        }
+        
+        .medium-priority {
+            color: #dcdcaa;
+        }
+        
+        .low-priority {
+            color: #4ec9b0;
+        }
+        
+        .checkbox {
+            color: #4ec9b0;
+        }
+        
+        .tag {
+            color: #569cd6;
+        }
+        
+        pre {
+            margin: 15px 0;
+        }
+        
+        .demo-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: #252525;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        
+        .demo-section h3 {
+            color: #61dafb;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .links {
+            padding: 20px;
+            background: #2d2d2d;
+            text-align: center;
+            border-top: 1px solid #3d3d3d;
+        }
+        
+        .links a {
+            color: #61dafb;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .links a:hover {
+            color: #4ec9b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Momentum</h1>
+            <p>A full-stack productivity web application built with pure Go</p>
+        </div>
+        
+        <div class="terminal">
+            <div class="demo-section">
+                <h3>🚀 Interactive Mode Demo</h3>
+                <pre>
+<span class="prompt">$</span> <span class="command">go run main.go</span>
+
+╔════════════════════════════════════════╗
+║   Welcome to Momentum v2.0            ║
+║   Now with Priority & Sorting!        ║
+╚════════════════════════════════════════╝
+
+📝 Your Todos:
+──────────────────────────────────────────────────────
+1. <span class="checkbox">[✓]</span> Fix login bug         <span class="high-priority">🔴 High</span> | 📅 Was due: Mar 15, 2026 | <span class="tag">🏷️  Work, Urgent</span>
+2. [ ] Prepare presentation  <span class="high-priority">🔴 High</span> | ⚠️  OVERDUE: Feb 27, 2026 | <span class="tag">🏷️  Work, Meeting</span>
+3. [ ] Buy groceries         <span class="low-priority">🟢 Low</span> | 📅 Due: Mar 05, 2026 | <span class="tag">🏷️  Personal, Shopping</span>
+──────────────────────────────────────────────────────
+                </pre>
+            </div>
+
+            <div class="demo-section">
+                <h3>⚡ CLI Mode Demo</h3>
+                <pre>
+<span class="prompt">$</span> <span class="command">go run main.go add "Review pull requests"</span>
+<span class="success">✅ Added: Review pull requests</span>
+
+<span class="prompt">$</span> <span class="command">go run main.go complete 1</span>
+<span class="success">✅ Completed: Review pull requests</span>
+
+<span class="prompt">$</span> <span class="command">go run main.go search "presentation"</span>
+🔍 Search results for 'presentation':
+──────────────────────────────────────────────
+2. [ ] Prepare presentation  <span class="high-priority">🔴 High</span>
+──────────────────────────────────────────────
+                </pre>
+            </div>
+
+            <div class="demo-section">
+                <h3>📊 Statistics Dashboard</h3>
+                <pre>
+<span class="prompt">$</span> <span class="command">go run main.go stats</span>
+
+╔══════════════════════════════════════════╗
+║       📊 STATISTICS DASHBOARD        ║
+╚══════════════════════════════════════════╝
+
+📄 Overview:
+   Total todos:        3
+   <span class="success">✅ Completed:        1</span>
+   <span class="info">📅 Pending:          2</span>
+   <span class="medium-priority">📈 Completion rate:  33.3%</span>
+
+🟢 By Priority:
+   <span class="high-priority">🔴 High:     2</span>
+   <span class="low-priority">🟢 Low:      1</span>
+
+⏰ Due Dates:
+   <span class="error">⚠️  Overdue:  1</span>
+                </pre>
+            </div>
+
+            <div class="demo-section">
+                <h3>✨ Features</h3>
+                <ul style="color: #d4d4d4; list-style: none; padding-left: 20px;">
+                    <li>🎨 Beautiful Color-Coded UI</li>
+                    <li>📅 Due Date Management with Smart Warnings</li>
+                    <li>🏷️  Tags & Categories</li>
+                    <li>🔍 Search & Filter</li>
+                    <li>📊 Statistics Dashboard</li>
+                    <li>💾 JSON Persistence</li>
+                    <li>⚡ Two Modes: Interactive OR CLI</li>
+                    <li>↕️  Smart Sorting by Priority/Status</li>
+                    <li>🎯 Priority Levels (Low/Medium/High)</li>
+                    <li>✏️  Edit Todos</li>
+                </ul>
+            </div>
+
+            <div class="buttons">
+                <button class="btn" onclick="window.open('https://github.com/yourusername/cli-todo-app', '_blank')">
+                    📦 View on GitHub
+                </button>
+                <button class="btn" onclick="window.open('https://replit.com/@yourusername/cli-todo-app', '_blank')">
+                    🌍 Try Online (Replit)
+                </button>
+                <button class="btn" onclick="window.open('https://github.com/yourusername/cli-todo-app/releases', '_blank')">
+                    ⬇️ Download Binary
+                </button>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="https://github.com/yourusername/cli-todo-app">GitHub</a>
+            <a href="https://github.com/yourusername/cli-todo-app/blob/main/README.md">Documentation</a>
+            <a href="https://linkedin.com/in/yourprofile">Contact</a>
+        </div>
+    </div>
+</body>
+</html>

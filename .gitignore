@@ -1,0 +1,66 @@
+# Binaries and executables
+momentum
+todo
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Coverage output
+*.out
+
+# Data files (user-generated, should not be committed)
+todos.json
+
+# Backup files
+*.bak
+*.backup
+*_backup.go
+*.backup.*
+README.md.backup
+main_cli_backup.go.bak
+main_cli_only.go.bak
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+eht htmls.db
+Desktop.ini
+
+# Build artifacts
+dist/
+build/
+bin/
+
+# Logs
+*.log
+/tmp/
+
+# Environment files
+.env
+.env.local
+
+# Go workspace file
+go.work
