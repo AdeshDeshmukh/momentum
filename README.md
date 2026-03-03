@@ -72,7 +72,7 @@ go run main.go cli
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/momentum.git
+git clone https://github.com/AdeshDeshmukh/momentum.git
 cd momentum
 
 # Run in web mode (recommended for first-time users)
@@ -128,8 +128,8 @@ $ go run main.go stats
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/cli-todo-app.git
-cd cli-todo-app
+git clone https://github.com/AdeshDeshmukh/momentum.git
+cd momentum
 
 # Run directly
 go run main.go
@@ -358,10 +358,9 @@ MIT License - feel free to use this project for learning or personal use.
 
 **Adesh Kishor Deshmukh**
 
-- 💼 LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- 🐙 GitHub: [@yourusername](https://github.com/yourusername)
-- 📧 Email: your.email@example.com
-- 🌐 Portfolio: [yourwebsite.com](https://yourwebsite.com)
+- 💼 LinkedIn: [linkedin.com/in/adeshdeshmukh](https://linkedin.com/in/adeshdeshmukh)
+- 🐙 GitHub: [@AdeshDeshmukh](https://github.com/AdeshDeshmukh)
+- 📧 Email: adeshkd123@gmail.com
 
 ---
 
