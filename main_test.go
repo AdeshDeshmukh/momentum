@@ -5,29 +5,23 @@ import (
 	"time"
 )
 
-// TestTodoCreation tests creating a new todo item
 func TestTodoCreation(t *testing.T) {
-	// Setup: Clear todos and reset ID
 	todos = []Todo{}
 	nextID = 1
 
-	// Test data
 	title := "Test task"
 	priority := High
 	dueDate := time.Now().Add(24 * time.Hour)
 	tags := []string{"test", "important"}
 
-	// Execute: Add a todo item
 	addTodoItem(title, priority, &dueDate, tags)
 
-	// Assert: Check if todo was added
 	if len(todos) == 0 {
 		t.Fatal("Expected 1 todo, got 0")
 	}
 
 	todo := todos[0]
 
-	// Verify all fields
 	if todo.ID != 1 {
 		t.Errorf("Expected ID 1, got %d", todo.ID)
 	}
