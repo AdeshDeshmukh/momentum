@@ -479,7 +479,7 @@ func getPriority(scanner *bufio.Scanner) Priority {
 }
 func listTodosCLI() {
 	if len(todos) == 0 {
-		fmt.Println("\n❌ No tasks yet!\n")
+		fmt.Println("\n❌ No tasks yet!")
 		return
 	}
 	fmt.Println("\n📝 Your Tasks:")
@@ -491,7 +491,7 @@ func listTodosCLI() {
 		}
 		fmt.Printf("%d. %s %-30s %s\n", todo.ID, status, todo.Title, todo.Priority)
 	}
-	fmt.Println("──────────────────────────────────────────────────────\n")
+	fmt.Println("──────────────────────────────────────────────────────")
 }
 func displayStatsCLI(stats Statistics) {
 	fmt.Println("\n╔══════════════════════════════════════════╗")
