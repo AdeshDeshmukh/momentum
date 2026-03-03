@@ -358,7 +358,7 @@ MIT License - feel free to use this project for learning or personal use.
 
 **Adesh Kishor Deshmukh**
 
-- 💼 LinkedIn: [linkedin.com/in/adeshdeshmukh](https://linkedin.com/in/adeshdeshmukh)
+- 💼 LinkedIn: [linkedin.com/in/adesh-deshmukh](https://www.linkedin.com/in/adesh-deshmukh/)
 - 🐙 GitHub: [@AdeshDeshmukh](https://github.com/AdeshDeshmukh)
 - 📧 Email: adeshkd123@gmail.com
 
