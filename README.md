@@ -4,6 +4,7 @@
 > Features a stunning animated web UI with dual-mode support (Web + CLI) — all without any external frameworks or dependencies.
 
 ![Go Version](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat&logo=go)
+![CI](https://github.com/AdeshDeshmukh/momentum/workflows/CI/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red)

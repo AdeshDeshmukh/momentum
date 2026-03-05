@@ -1,4 +1,5 @@
 package main
+
 import (
 	"bufio"
 	"encoding/json"
@@ -12,12 +13,15 @@ import (
 	"strings"
 	"time"
 )
+
 type Priority int
+
 const (
 	Low Priority = iota
 	Medium
 	High
 )
+
 func (p Priority) String() string {
 	switch p {
 	case Low:
@@ -42,6 +46,7 @@ func (p Priority) CSSClass() string {
 		return ""
 	}
 }
+
 type Todo struct {
 	ID        int        `json:"id"`
 	Title     string     `json:"title"`
@@ -50,6 +55,7 @@ type Todo struct {
 	DueDate   *time.Time `json:"dueDate,omitempty"`
 	Tags      []string   `json:"tags"`
 }
+
 func (t *Todo) DueDateFormatted() string {
 	if t.DueDate == nil {
 		return ""
@@ -78,6 +84,7 @@ func (t *Todo) IsDueToday() bool {
 func (t *Todo) TagsString() string {
 	return strings.Join(t.Tags, ", ")
 }
+
 type PageData struct {
 	Todos        []Todo
 	Stats        Statistics
@@ -98,9 +105,12 @@ type Statistics struct {
 	Tagged         int
 	CompletionRate float64
 }
+
 var todos []Todo
 var nextID = 1
+
 const filename = "todos.json"
+
 func addTodoItem(title string, priority Priority, dueDate *time.Time, tags []string) {
 	newTodo := Todo{
 		ID:        nextID,
@@ -168,7 +178,7 @@ func calculateStatistics() Statistics {
 		if todo.DueDate != nil && !todo.Completed {
 			if todo.DueDate.Before(now) {
 				stats.Overdue++
-			} else if  todo.DueDate.Sub(now).Hours() < 24 {
+			} else if todo.DueDate.Sub(now).Hours() < 24 {
 				stats.DueToday++
 			}
 		}
@@ -239,7 +249,9 @@ func loadTodos() {
 	}
 	nextID = maxID + 1
 }
+
 var tmpl *template.Template
+
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	stats := calculateStatistics()
 	data := PageData{

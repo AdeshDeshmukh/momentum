@@ -386,9 +386,9 @@ func TestTodoMethods(t *testing.T) {
 
 	t.Run("IsOverdue", func(t *testing.T) {
 		tests := []struct {
-			name      string
-			todo      Todo
-			wantTrue  bool
+			name     string
+			todo     Todo
+			wantTrue bool
 		}{
 			{"overdue task", Todo{DueDate: &yesterday, Completed: false}, true},
 			{"future task", Todo{DueDate: &nextWeek, Completed: false}, false},
@@ -689,7 +689,7 @@ func TestAddTodoItemVariants(t *testing.T) {
 
 	addTodoItem("Task without tags", Low, nil, []string{})
 	addTodoItem("Task with date", Medium, &time.Time{}, []string{"tag"})
-	
+
 	if len(todos) != 2 {
 		t.Errorf("got %d todos, want 2", len(todos))
 	}
@@ -698,10 +698,10 @@ func TestAddTodoItemVariants(t *testing.T) {
 func TestToggleCompleteTwice(t *testing.T) {
 	todos = []Todo{{ID: 99, Title: "Test", Completed: false}}
 	nextID = 100
-	
+
 	toggleComplete(99)
 	toggleComplete(99)
-	
+
 	if todos[0].Completed != false {
 		t.Error("expected todo to be incomplete after double toggle")
 	}
@@ -710,9 +710,9 @@ func TestToggleCompleteTwice(t *testing.T) {
 func TestDeleteNonExistent(t *testing.T) {
 	todos = []Todo{{ID: 1, Title: "Keep me"}}
 	nextID = 2
-	
+
 	deleteTodoItem(999)
-	
+
 	if len(todos) != 1 {
 		t.Errorf("got %d todos, want 1", len(todos))
 	}
@@ -720,9 +720,9 @@ func TestDeleteNonExistent(t *testing.T) {
 
 func TestEmptySearch(t *testing.T) {
 	todos = []Todo{{ID: 1, Title: "Task"}}
-	
+
 	result := searchTodos("")
-	
+
 	if len(result) != 1 {
 		t.Errorf("got %d results for empty search, want 1", len(result))
 	}
@@ -733,9 +733,9 @@ func TestLoadTodosEdgeCase(t *testing.T) {
 	defer func() {
 		todos = originalTodos
 	}()
-	
+
 	loadTodos()
-	
+
 	if len(todos) >= 0 {
 		t.Log("loadTodos executed successfully")
 	}
@@ -1666,7 +1666,7 @@ func TestMultipleSaveLoad(t *testing.T) {
 func TestListTodosCLI(t *testing.T) {
 	t.Run("empty todos", func(t *testing.T) {
 		todos = []Todo{}
-		
+
 		// Just ensure it doesn't panic
 		listTodosCLI()
 	})
@@ -1676,7 +1676,7 @@ func TestListTodosCLI(t *testing.T) {
 			{ID: 1, Title: "Task 1", Priority: High, Completed: false},
 			{ID: 2, Title: "Task 2", Priority: Low, Completed: true},
 		}
-		
+
 		// Just ensure it doesn't panic and executes
 		listTodosCLI()
 	})
@@ -1694,7 +1694,7 @@ func TestDisplayStatsCLI(t *testing.T) {
 			Low:            4,
 			Overdue:        0,
 		}
-		
+
 		// Just ensure it doesn't panic
 		displayStatsCLI(stats)
 	})
@@ -1710,7 +1710,7 @@ func TestDisplayStatsCLI(t *testing.T) {
 			Low:            2,
 			Overdue:        3,
 		}
-		
+
 		// Just ensure it doesn't panic and handles overdue path
 		displayStatsCLI(stats)
 	})
@@ -1775,12 +1775,12 @@ func TestSaveTodosEdgeCases(t *testing.T) {
 	t.Run("save empty list", func(t *testing.T) {
 		todos = []Todo{}
 		saveTodos()
-		
+
 		data, err := os.ReadFile("todos.json")
 		if err != nil {
 			t.Fatalf("should create file: %v", err)
 		}
-		
+
 		if len(data) < 2 {
 			t.Error("should have at least []")
 		}
@@ -1795,15 +1795,15 @@ func TestSaveTodosEdgeCases(t *testing.T) {
 				Priority: Priority(i % 3),
 			})
 		}
-		
+
 		saveTodos()
-		
+
 		originalTodos := make([]Todo, len(todos))
 		copy(originalTodos, todos)
-		
+
 		todos = []Todo{}
 		loadTodos()
-		
+
 		if len(todos) != 100 {
 			t.Errorf("expected 100 todos, got %d", len(todos))
 		}
