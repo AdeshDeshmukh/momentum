@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: momentum
+    env: go
+    buildCommand: go build -o app main.go
+    startCommand: ./app web
+    envVars:
+      - key: PORT
+        generateValue: true
+    healthCheckPath: /

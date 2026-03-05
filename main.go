@@ -537,9 +537,16 @@ func main() {
 			http.HandleFunc("/search", searchHandler)
 			http.HandleFunc("/stats", statsHandler)
 			http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-			fmt.Println("✅ Server running at http://localhost:8080")
+			
+			// Get port from environment variable (for cloud deployment) or use 8080 as default
+			port := os.Getenv("PORT")
+			if port == "" {
+				port = "8080"
+			}
+			
+			fmt.Println("✅ Server running at http://localhost:" + port)
 			fmt.Println("Press Ctrl+C to stop")
-			log.Fatal(http.ListenAndServe(":8080", nil))
+			log.Fatal(http.ListenAndServe(":"+port, nil))
 			return
 		}
 		if command == "cli" {
