@@ -5,9 +5,20 @@
 
 ![Go Version](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat&logo=go)
 ![CI](https://github.com/AdeshDeshmukh/momentum/workflows/CI/badge.svg)
+![Deployment](https://img.shields.io/badge/deployment-live-brightgreen?logo=render)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red)
+
+---
+
+## 🌐 Live Demo
+
+**👉 [Try the Live App Here!](https://momentum-8ucf.onrender.com) 👈**
+
+*The app is deployed on Render.com. First load may take 30 seconds if the app was sleeping.*
+
+---
 
 ## 🎯 About
 
@@ -40,9 +51,18 @@ Perfect for learning Go web development or as a portfolio project!
 - 📋 **Full Feature Parity** - All web features available in CLI
 - 🔄 **Shared Data** - Seamlessly switch between web and CLI modes
 
-## 🎬 Live Demo
+## 🎬 Try It Yourself
 
-### See It In Action! 👀
+### ☁️ Cloud Version (No Installation Required)
+
+**Visit the live app:** [https://momentum-8ucf.onrender.com](https://momentum-8ucf.onrender.com)
+
+- ✅ No setup needed
+- ✅ Works on any device
+- ✅ Try all features instantly
+- ⚠️ First load takes ~30 seconds (free tier)
+
+### 💻 Local Version (Full Features)
 
 **Web Mode:**
 ```bash
@@ -344,6 +364,48 @@ momentum/
 - ✅ **Dual-Mode Design** - Shared business logic
 - ✅ **Type Safety** - Strong typing throughout
 
+## 🚀 Deployment
+
+### Live Production Instance
+
+**Momentum is deployed on Render.com:** [https://momentum-8ucf.onrender.com](https://momentum-8ucf.onrender.com)
+
+### Deployment Pipeline
+- ✅ **CI/CD**: GitHub Actions runs tests on every push
+- ✅ **Auto-Deploy**: Render automatically deploys when tests pass
+- ✅ **Multi-Version Testing**: Tests run on Go 1.21, 1.22, 1.23
+- ✅ **Zero Downtime**: Rolling deployments with health checks
+- ✅ **Environment Config**: Dynamic port configuration for cloud hosting
+
+### Infrastructure
+- **Platform**: Render.com (Free Tier)
+- **Runtime**: Go 1.26.0
+- **Build**: `go build -tags netgo -ldflags '-s -w' -o app`
+- **Start**: `./app web`
+- **Health Check**: `GET /`
+- **Region**: US West (Oregon)
+
+### Deployment Features
+- 🔄 **Automatic deploys** from `main` branch
+- 📊 **Real-time build logs** and monitoring
+- 🌍 **Global CDN** for static assets
+- 🔒 **HTTPS** enabled by default
+- 📈 **Uptime monitoring** via Render dashboard
+
+### Deploy Your Own
+```bash
+# Fork this repo, then:
+1. Sign up at render.com (free)
+2. Connect your GitHub account
+3. Select your forked repository
+4. Render auto-detects configuration from render.yaml
+5. Click "Create Web Service"
+6. Your app is live in ~5 minutes!
+```
+
+### Environment Variables
+The app reads `PORT` from environment (provided by Render) and falls back to `8080` for local development.
+
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
@@ -368,19 +430,25 @@ MIT License - feel free to use this project for learning or personal use.
 ## 💼 Why This Project Stands Out for Resumes
 
 ### Key Selling Points:
-1. **Full-Stack Development** - Built both frontend and backend
-2. **Zero Dependencies** - Deep understanding of fundamentals
-3. **Production-Ready** - Clean code, error handling, persistence
+1. **Full-Stack Development** - Built both frontend and backend from scratch
+2. **Zero Dependencies** - Deep understanding of fundamentals, no framework magic
+3. **Production-Ready** - Clean code, error handling, persistence, deployed live
 4. **Modern UI/UX** - Advanced CSS animations and responsive design
 5. **Architecture Skills** - Dual-mode design with shared logic
-6. **Best Practices** - Clean code, documentation, version control
+6. **DevOps & CI/CD** - GitHub Actions, automated testing, continuous deployment
+7. **Testing** - Comprehensive test suite with 67.3% coverage
+8. **Cloud Deployment** - Live production app on Render.com
+9. **Best Practices** - Clean code, documentation, version control
 
 ### Perfect for Interviews:
 - Can explain every line of code (no magic frameworks)
 - Demonstrates HTTP, templates, and web fundamentals
-- Shows CSS mastery without JavaScript crutch
+- Shows CSS mastery without JavaScript dependencies
 - Proves ability to build complete applications solo
+- **Live demo available** - recruiters can try it immediately
+- CI/CD pipeline shows DevOps understanding
 - Easy to run and demo during technical interviews
+- Professional README and documentation
 
 ## 🌟 Acknowledgments
 
